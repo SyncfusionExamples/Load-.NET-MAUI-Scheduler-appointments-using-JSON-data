@@ -50,7 +50,8 @@ namespace SchedulerMAUI
         private async void LoadAppointments(object obj)
         {
             if (jsonWebData == null)
-                await GetJsonData();
+                 jsonWebData = await GetJsonWebData();
+
             Random random = new Random();
             var visibleDates = ((SchedulerQueryAppointmentsEventArgs)obj).VisibleDates;
             this.Events = new ObservableCollection<Event>();
@@ -83,11 +84,11 @@ namespace SchedulerMAUI
             this.ShowBusyIndicator = false;
         }
 
-        private async Task GetJsonData()
+        private async Task<List<WebData>> GetJsonWebData()
         {
             var httpClient = new HttpClient();
             var response = await httpClient.GetStringAsync("https://services.syncfusion.com/js/production/api/schedule");
-            jsonWebData = JsonConvert.DeserializeObject<List<WebData>>(response);
+            return JsonConvert.DeserializeObject<List<WebData>>(response);
         }
 
         private List<Brush> GetColors()
