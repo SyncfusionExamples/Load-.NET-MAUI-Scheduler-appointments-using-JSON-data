@@ -88,7 +88,7 @@ namespace SchedulerMAUI
         }
     }
 
-    public class JSONData
+    public class WebData
     {
         public string Subject { get; set; }
         public string StartTime { get; set; }

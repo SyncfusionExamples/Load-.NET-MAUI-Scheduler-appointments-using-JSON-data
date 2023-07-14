@@ -14,7 +14,7 @@ namespace SchedulerMAUI
 
         private List<Brush> colors;
 
-        private List<JSONData> jsonDataCollection;
+        private List<WebData> jsonWebData;
         /// <summary>
         /// Gets or sets meetings.
         /// </summary>
@@ -49,7 +49,7 @@ namespace SchedulerMAUI
         }
         private async void LoadAppointments(object obj)
         {
-            if (jsonDataCollection == null)
+            if (jsonWebData == null)
                 await GetJsonData();
             Random random = new Random();
             var visibleDates = ((SchedulerQueryAppointmentsEventArgs)obj).VisibleDates;
@@ -59,7 +59,7 @@ namespace SchedulerMAUI
             DateTime visibleStartDate = visibleDates.FirstOrDefault();
             DateTime visibleEndDate = visibleDates.LastOrDefault();
 
-            foreach (var data in jsonDataCollection)
+            foreach (var data in jsonWebData)
             {
                 DateTime startDate = Convert.ToDateTime(data.StartTime);
                 DateTime endDate = Convert.ToDateTime(data.EndTime);
@@ -77,7 +77,7 @@ namespace SchedulerMAUI
                 }
             }
 
-            if (jsonDataCollection != null)
+            if (jsonWebData != null)
                 await Task.Delay(1000);
 
             this.ShowBusyIndicator = false;
@@ -87,7 +87,7 @@ namespace SchedulerMAUI
         {
             var httpClient = new HttpClient();
             var response = await httpClient.GetStringAsync("https://services.syncfusion.com/js/production/api/schedule");
-            jsonDataCollection = JsonConvert.DeserializeObject<List<JSONData>>(response);
+            jsonWebData = JsonConvert.DeserializeObject<List<WebData>>(response);
         }
 
         private List<Brush> GetColors()
