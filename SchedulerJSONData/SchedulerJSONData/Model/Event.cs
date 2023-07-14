@@ -12,7 +12,7 @@ namespace SchedulerMAUI
         public string EventName { get; set; }
         public DateTime From { get; set; }
         public DateTime To { get; set; }
-        public Color Color { get; set; }
+        public Brush Color { get; set; }
     }
 
     public class JSONData

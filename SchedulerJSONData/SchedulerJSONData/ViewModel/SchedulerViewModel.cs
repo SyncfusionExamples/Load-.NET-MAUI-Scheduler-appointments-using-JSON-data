@@ -12,6 +12,8 @@ namespace SchedulerMAUI
 
         private ObservableCollection<Meeting> meetings;
 
+        private List<Brush> colors;
+
         private List<JSONData> jsonDataCollection;
         /// <summary>
         /// Gets or sets meetings.
@@ -43,12 +45,13 @@ namespace SchedulerMAUI
         public SchedulerViewModel()
         {
             this.QueryAppointmentsCommand = new Command<object>(LoadAppointments);
+            colors = this.GetColors();
         }
         private async void LoadAppointments(object obj)
         {
             if (jsonDataCollection == null)
                 await GetJsonData();
-
+            Random random = new Random();
             var visibleDates = ((SchedulerQueryAppointmentsEventArgs)obj).VisibleDates;
             this.Meetings = new ObservableCollection<Meeting>();
             this.ShowBusyIndicator = true;
@@ -69,7 +72,8 @@ namespace SchedulerMAUI
                         EventName = data.Subject,
                         From = startDate,
                         To = endDate,
-                    });
+                        Color = this.colors[random.Next(this.colors.Count)]
+                });
                 }
             }
 
@@ -85,7 +89,16 @@ namespace SchedulerMAUI
             var response = await httpClient.GetStringAsync("https://services.syncfusion.com/js/production/api/schedule");
             jsonDataCollection = JsonConvert.DeserializeObject<List<JSONData>>(response);
         }
-      
+
+        private List<Brush> GetColors()
+        {
+            return new List<Brush>
+            {
+                Color.FromArgb("#FF8B1FA9"), Color.FromArgb("#FFD20100"), Color.FromArgb("#FFFC571D"), Color.FromArgb("#FF36B37B"), Color.FromArgb("#FF3D4FB5"),
+                Color.FromArgb("#FF3D4FB5"), Color.FromArgb("#FF01A1EF"), Color.FromArgb("#FF0F8644"), Color.FromArgb("#FF00ABA9")
+            };
+        }
+
         /// <summary>
         /// Occurs when property changed.
         /// </summary>

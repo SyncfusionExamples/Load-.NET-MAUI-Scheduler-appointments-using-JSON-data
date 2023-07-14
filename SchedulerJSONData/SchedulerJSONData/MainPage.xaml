@@ -15,7 +15,8 @@
                 <scheduler:SchedulerAppointmentMapping
                         EndTime="To"
                         StartTime="From"
-                        Subject="EventName" />
+                        Subject="EventName" 
+                    Background="Color"/>
             </scheduler:SfScheduler.AppointmentMapping>
             <scheduler:SfScheduler.BindingContext>
                 <local:SchedulerViewModel/>
