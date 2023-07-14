@@ -10,13 +10,15 @@
                                ShowBusyIndicator="{Binding ShowBusyIndicator}"
                            AllowedViews="Day,Week,WorkWeek,Month,TimelineDay,TimelineWeek,TimelineWorkWeek,TimelineMonth,Agenda"
                            QueryAppointmentsCommand="{Binding QueryAppointmentsCommand}"
-                           AppointmentsSource="{Binding Meetings}">
+                           AppointmentsSource="{Binding Events}">
             <scheduler:SfScheduler.AppointmentMapping>
                 <scheduler:SchedulerAppointmentMapping
-                        EndTime="To"
-                        StartTime="From"
-                        Subject="EventName" 
-                    Background="Color"/>
+                Subject="EventName"
+                StartTime="From"
+                EndTime="To"
+                Background="Background"
+                IsAllDay="IsAllDay"
+               />
             </scheduler:SfScheduler.AppointmentMapping>
             <scheduler:SfScheduler.BindingContext>
                 <local:SchedulerViewModel/>

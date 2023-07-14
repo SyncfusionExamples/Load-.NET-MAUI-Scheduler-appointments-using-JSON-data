@@ -10,7 +10,7 @@ namespace SchedulerMAUI
     {
         private bool showBusyIndicator;
 
-        private ObservableCollection<Meeting> meetings;
+        private ObservableCollection<Event> events;
 
         private List<Brush> colors;
 
@@ -18,16 +18,16 @@ namespace SchedulerMAUI
         /// <summary>
         /// Gets or sets meetings.
         /// </summary>
-        public ObservableCollection<Meeting> Meetings
+        public ObservableCollection<Event> Events
         {
             get
             {
-                return this.meetings;
+                return this.events;
             }
             set
             {
-                this.meetings = value;
-                this.RaiseOnPropertyChanged("Meetings");
+                this.events = value;
+                this.RaiseOnPropertyChanged(nameof(Events));
             }
         }
         public bool ShowBusyIndicator
@@ -53,7 +53,7 @@ namespace SchedulerMAUI
                 await GetJsonData();
             Random random = new Random();
             var visibleDates = ((SchedulerQueryAppointmentsEventArgs)obj).VisibleDates;
-            this.Meetings = new ObservableCollection<Meeting>();
+            this.Events = new ObservableCollection<Event>();
             this.ShowBusyIndicator = true;
 
             DateTime visibleStartDate = visibleDates.FirstOrDefault();
@@ -67,12 +67,12 @@ namespace SchedulerMAUI
                 if ((visibleStartDate <= startDate.Date && visibleEndDate >= startDate.Date) ||
                 (visibleStartDate <= endDate.Date && visibleEndDate >= endDate.Date))
                 {
-                    Meetings.Add(new Meeting()
+                    Events.Add(new Event()
                     {
                         EventName = data.Subject,
                         From = startDate,
                         To = endDate,
-                        Color = this.colors[random.Next(this.colors.Count)]
+                        Background = this.colors[random.Next(this.colors.Count)]
                 });
                 }
             }
