@@ -49,6 +49,7 @@ namespace SchedulerMAUI
         }
         private async void LoadAppointments(object obj)
         {
+            //// Get appointment details from web service
             if (jsonWebData == null)
                  jsonWebData = await GetJsonWebData();
 
