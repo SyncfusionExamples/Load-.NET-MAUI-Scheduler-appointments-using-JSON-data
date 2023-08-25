@@ -14,7 +14,6 @@ namespace SchedulerMAUI
         private bool isAllDay;
         private string eventName;
         private Brush background;
-        public string location;
 
         /// <summary>
         /// Gets or sets the value to display the start date.
@@ -72,12 +71,6 @@ namespace SchedulerMAUI
         {
             get { return this.background; }
             set { this.background = value; }
-        }
-
-        public string Location
-        {
-            get { return this.location; }
-            set { this.location = value; }
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
