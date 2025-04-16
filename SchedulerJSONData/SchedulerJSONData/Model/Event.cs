@@ -12,8 +12,8 @@ namespace SchedulerMAUI
         private DateTime from;
         private DateTime to;
         private bool isAllDay;
-        private string eventName;
-        private Brush background;
+        private string eventName = string.Empty;
+        private Brush? background;
 
         /// <summary>
         /// Gets or sets the value to display the start date.
@@ -67,7 +67,7 @@ namespace SchedulerMAUI
         /// <summary>
         /// Gets or sets the value to display the background.
         /// </summary>
-        public Brush Background
+        public Brush? Background
         {
             get { return this.background; }
             set { this.background = value; }
@@ -83,8 +83,8 @@ namespace SchedulerMAUI
 
     public class WebData
     {
-        public string Subject { get; set; }
-        public string StartTime { get; set; }
-        public string EndTime { get; set; }
+        public string Subject { get; set; } = string.Empty;
+        public string StartTime { get; set; } = string.Empty;
+        public string EndTime { get; set; } = string.Empty;
     }
 }
