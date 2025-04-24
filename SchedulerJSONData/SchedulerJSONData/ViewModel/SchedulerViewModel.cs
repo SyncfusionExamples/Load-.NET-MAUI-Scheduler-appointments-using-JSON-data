@@ -10,11 +10,11 @@ namespace SchedulerMAUI
     {
         private bool showBusyIndicator;
 
-        private ObservableCollection<Event> events;
+        private ObservableCollection<Event> events = new ObservableCollection<Event>();
 
-        private List<Brush> colors;
+        private List<Brush> colors = new List<Brush>();
 
-        private List<WebData> jsonWebData;
+        private List<WebData> jsonWebData = new List<WebData>();
         /// <summary>
         /// Gets or sets meetings.
         /// </summary>
@@ -89,7 +89,12 @@ namespace SchedulerMAUI
         {
             var httpClient = new HttpClient();
             var response = await httpClient.GetStringAsync("https://services.syncfusion.com/js/production/api/schedule");
-            return JsonConvert.DeserializeObject<List<WebData>>(response);
+            if (string.IsNullOrWhiteSpace(response))
+            {
+                return new List<WebData>();
+            }
+            var result = JsonConvert.DeserializeObject<List<WebData>>(response);
+            return result ?? new List<WebData>();
         }
 
         private List<Brush> GetColors()
@@ -104,7 +109,7 @@ namespace SchedulerMAUI
         /// <summary>
         /// Occurs when property changed.
         /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
         /// <summary>
         /// Invoke method when property changed.
         /// </summary>
